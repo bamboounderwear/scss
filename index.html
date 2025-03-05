@@ -1,38 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Scss Tutorial</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Framework Playground</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+      body {
+        margin: 0;
+        padding: 1rem;
+        min-height: 100vh;
+        background-color: #f8fafc;
+      }
+      
+      #html-editor, #css-editor {
+        height: 300px;
+        border-radius: 0.5rem;
+        border: 1px solid #e2e8f0;
+      }
+      
+      #preview {
+        width: 100%;
+        min-height: 400px;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+        background: white;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+
+      .editor-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .preview-container {
+        background: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      h1, h2 {
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #1a1a1a;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #4a5568;
+      }
+    </style>
   </head>
-
   <body>
-    <div class="d-flex justify-center items-center my-3 mx-auto">
-      <div class="pt-2 pb-4 px-3">
-        <h3 class="text-center">This plain Scsss</h3>
+    <main class="container">
+      <h1>CSS Framework Playground</h1>
+      
+      <div class="editor-container">
+        <div>
+          <h2>HTML</h2>
+          <div id="html-editor"></div>
+        </div>
+        <div>
+          <h2>CSS</h2>
+          <div id="css-editor"></div>
+        </div>
       </div>
-      <div class="pt-2 pb-4 px-3">
-        <h3 class="text-right">It's amazing</h3>
+      
+      <div class="preview-container">
+        <h2>Preview</h2>
+        <div id="preview"></div>
       </div>
-    </div>
-    <div class="d-grid scss-grid">
-      <div class="px-3 py-2">
-        <ul>
-          <li>List item</li>
-          <li>another list item</li>
-          <li>one more of those</li>
-        </ul>
-      </div>
-      <div class="pt-2 pb-3 px-2">
-        <h3 class="text-center">Pretty Dope stuff</h3>
-        <p class="text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi libero maxime adipisci quos,
-          asperiores omnis?
-        </p>
-      </div>
-    </div>
-  </body>
+    </main>
 
+    <script type="module" src="/js/main.js"></script>
+  </body>
 </html>

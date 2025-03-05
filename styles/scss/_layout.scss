@@ -1,0 +1,255 @@
+// Container sizes
+$container-max-widths: (
+  'sm': 540px,
+  'md': 720px,
+  'lg': 960px,
+  'xl': 1140px,
+  'xxl': 1320px
+);
+
+// Width and height percentages
+$sizes: (
+  '0': 0%,
+  '25': 25%,
+  '33': 33.333333%,
+  '50': 50%,
+  '66': 66.666667%,
+  '75': 75%,
+  '100': 100%,
+  'auto': auto
+);
+
+// Viewport units
+$viewport-units: (
+  '25': 25,
+  '33': 33.333333,
+  '50': 50,
+  '66': 66.666667,
+  '75': 75,
+  '100': 100
+);
+
+// Base container
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+  
+  // Container with max-width
+  @each $breakpoint, $width in $container-max-widths {
+    &-#{$breakpoint} {
+      @extend .container;
+      max-width: $width;
+    }
+  }
+  
+  // Fluid container
+  &-fluid {
+    @extend .container;
+    max-width: none;
+  }
+}
+
+// Width utilities
+@each $key, $value in $sizes {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+// Height utilities
+@each $key, $value in $sizes {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
+// Viewport width utilities
+@each $key, $value in $viewport-units {
+  .vw-#{$key} {
+    width: #{$value}vw;
+  }
+}
+
+// Viewport height utilities
+@each $key, $value in $viewport-units {
+  .vh-#{$key} {
+    height: #{$value}vh;
+  }
+}
+
+// Min/Max width utilities
+@each $key, $value in $viewport-units {
+  .min-w-#{$key} {
+    min-width: #{$value}vw;
+  }
+  
+  .max-w-#{$key} {
+    max-width: #{$value}vw;
+  }
+}
+
+// Min/Max height utilities
+@each $key, $value in $viewport-units {
+  .min-h-#{$key} {
+    min-height: #{$value}vh;
+  }
+  
+  .max-h-#{$key} {
+    max-height: #{$value}vh;
+  }
+}
+
+// Position utilities
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+// Z-index utilities
+@for $i from 0 through 50 {
+  @if $i % 10 == 0 {
+    .z-#{$i} {
+      z-index: $i;
+    }
+  }
+}
+
+// Basic layout utilities
+.center-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-y {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.center-xy {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Aspect ratio utilities
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+// Object fit utilities
+.object {
+  &-contain {
+    object-fit: contain;
+  }
+  
+  &-cover {
+    object-fit: cover;
+  }
+  
+  &-fill {
+    object-fit: fill;
+  }
+  
+  &-none {
+    object-fit: none;
+  }
+  
+  &-scale-down {
+    object-fit: scale-down;
+  }
+}
+
+// Float utilities
+.float {
+  &-left {
+    float: left;
+  }
+  
+  &-right {
+    float: right;
+  }
+  
+  &-none {
+    float: none;
+  }
+}
+
+// Clear utilities
+.clear {
+  &-left {
+    clear: left;
+  }
+  
+  &-right {
+    clear: right;
+  }
+  
+  &-both {
+    clear: both;
+  }
+  
+  &-none {
+    clear: none;
+  }
+}
+
+// Box sizing utilities
+.box {
+  &-border {
+    box-sizing: border-box;
+  }
+  
+  &-content {
+    box-sizing: content-box;
+  }
+}
+
+// Position utilities for edges
+$edges: (
+  '0': 0,
+  '25': 25%,
+  '50': 50%,
+  '75': 75%,
+  '100': 100%,
+  'auto': auto
+);
+
+@each $key, $value in $edges {
+  .top-#{$key} {
+    top: $value;
+  }
+  
+  .right-#{$key} {
+    right: $value;
+  }
+  
+  .bottom-#{$key} {
+    bottom: $value;
+  }
+  
+  .left-#{$key} {
+    left: $value;
+  }
+}

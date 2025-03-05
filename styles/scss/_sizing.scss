@@ -1,0 +1,155 @@
+// Base sizing scale
+$sizes: (
+  '0': 0,
+  '25': 25%,
+  '33': 33.333333%,
+  '50': 50%,
+  '66': 66.666667%,
+  '75': 75%,
+  '100': 100%,
+  'auto': auto
+);
+
+// Fixed size scale (in rem)
+$fixed-sizes: (
+  'px': 1px,
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '4': 1rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '12': 3rem,
+  '16': 4rem,
+  '20': 5rem,
+  '24': 6rem,
+  '32': 8rem
+);
+
+// Width utilities
+@each $key, $value in $sizes {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+// Height utilities
+@each $key, $value in $sizes {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
+// Fixed width utilities
+@each $key, $value in $fixed-sizes {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+// Fixed height utilities
+@each $key, $value in $fixed-sizes {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
+// Min-width utilities
+@each $key, $value in $sizes {
+  .min-w-#{$key} {
+    min-width: $value;
+  }
+}
+
+// Min-height utilities
+@each $key, $value in $sizes {
+  .min-h-#{$key} {
+    min-height: $value;
+  }
+}
+
+// Max-width utilities
+@each $key, $value in $sizes {
+  .max-w-#{$key} {
+    max-width: $value;
+  }
+}
+
+// Max-height utilities
+@each $key, $value in $sizes {
+  .max-h-#{$key} {
+    max-height: $value;
+  }
+}
+
+// Viewport relative sizes
+$viewport-sizes: (
+  '25': 25,
+  '50': 50,
+  '75': 75,
+  '100': 100
+);
+
+@each $key, $value in $viewport-sizes {
+  .vw-#{$key} {
+    width: #{$value}vw;
+  }
+  
+  .vh-#{$key} {
+    height: #{$value}vh;
+  }
+  
+  .vmin-#{$key} {
+    width: #{$value}vmin;
+    height: #{$value}vmin;
+  }
+  
+  .vmax-#{$key} {
+    width: #{$value}vmax;
+    height: #{$value}vmax;
+  }
+}
+
+// Aspect ratio utilities
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+// Object fit utilities
+.object-contain { object-fit: contain; }
+.object-cover { object-fit: cover; }
+.object-fill { object-fit: fill; }
+.object-none { object-fit: none; }
+.object-scale-down { object-fit: scale-down; }
+
+// Object position utilities
+.object-bottom { object-position: bottom; }
+.object-center { object-position: center; }
+.object-left { object-position: left; }
+.object-right { object-position: right; }
+.object-top { object-position: top; }
+
+// Box sizing utilities
+.box-border { box-sizing: border-box; }
+.box-content { box-sizing: content-box; }
+
+// Screen readers only utility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

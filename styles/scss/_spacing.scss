@@ -1,0 +1,120 @@
+// Spacing scale
+$spacing-scale: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.25rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem,
+  '16': 4rem,
+  '20': 5rem,
+  '24': 6rem,
+  '32': 8rem,
+  'auto': auto
+);
+
+// Negative margin scale
+$negative-spacing: (
+  '1': -0.25rem,
+  '2': -0.5rem,
+  '3': -0.75rem,
+  '4': -1rem,
+  '5': -1.25rem,
+  '6': -1.5rem,
+  '8': -2rem,
+  '10': -2.5rem,
+  '12': -3rem
+);
+
+// Spacing properties
+$spacing-properties: (
+  'm': margin,
+  'p': padding
+);
+
+// Spacing directions
+$spacing-directions: (
+  't': top,
+  'r': right,
+  'b': bottom,
+  'l': left,
+  'x': (right, left),
+  'y': (top, bottom)
+);
+
+// Generate standard spacing utilities
+@each $property-key, $property in $spacing-properties {
+  // All sides
+  @each $space-key, $space-value in $spacing-scale {
+    .#{$property-key}-#{$space-key} {
+      #{$property}: $space-value;
+    }
+  }
+  
+  // Directional spacing
+  @each $direction-key, $direction-value in $spacing-directions {
+    @each $space-key, $space-value in $spacing-scale {
+      .#{$property-key}#{$direction-key}-#{$space-key} {
+        @if type-of($direction-value) == list {
+          @each $dir in $direction-value {
+            #{$property}-#{$dir}: $space-value;
+          }
+        } @else {
+          #{$property}-#{$direction-value}: $space-value;
+        }
+      }
+    }
+  }
+}
+
+// Generate negative margin utilities
+@each $space-key, $space-value in $negative-spacing {
+  // All sides negative margin
+  .-m-#{$space-key} {
+    margin: $space-value;
+  }
+  
+  // Directional negative margins
+  @each $direction-key, $direction-value in $spacing-directions {
+    .-m#{$direction-key}-#{$space-key} {
+      @if type-of($direction-value) == list {
+        @each $dir in $direction-value {
+          margin-#{$dir}: $space-value;
+        }
+      } @else {
+        margin-#{$direction-value}: $space-value;
+      }
+    }
+  }
+}
+
+// Gap utilities for flex and grid
+$gap-scale: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '6': 1.5rem,
+  '8': 2rem,
+  '10': 2.5rem,
+  '12': 3rem
+);
+
+@each $gap-key, $gap-value in $gap-scale {
+  .gap-#{$gap-key} {
+    gap: $gap-value;
+  }
+  
+  .gap-x-#{$gap-key} {
+    column-gap: $gap-value;
+  }
+  
+  .gap-y-#{$gap-key} {
+    row-gap: $gap-value;
+  }
+}

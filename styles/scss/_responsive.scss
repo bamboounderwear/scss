@@ -1,0 +1,78 @@
+// Breakpoint definitions
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  '2xl': 1536px
+);
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// Hide/Show utilities
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    .hidden-#{$breakpoint}-up {
+      display: none;
+    }
+    
+    .visible-#{$breakpoint}-up {
+      display: block;
+    }
+  }
+  
+  @media (max-width: $value - 1px) {
+    .hidden-#{$breakpoint}-down {
+      display: none;
+    }
+    
+    .visible-#{$breakpoint}-down {
+      display: block;
+    }
+  }
+}
+
+// Container queries
+@mixin container-query($size) {
+  @container (min-width: $size) {
+    @content;
+  }
+}
+
+.container-type {
+  container-type: inline-size;
+}
+
+// Responsive padding
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    .p-#{$breakpoint} {
+      padding: $spacing-unit;
+    }
+  }
+}
+
+// Responsive margin
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    .m-#{$breakpoint} {
+      margin: $spacing-unit;
+    }
+  }
+}
+
+// Responsive grid
+@each $breakpoint, $value in $breakpoints {
+  @media (min-width: $value) {
+    .grid-cols-#{$breakpoint} {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+}

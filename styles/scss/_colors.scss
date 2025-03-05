@@ -1,0 +1,164 @@
+// Core color variables
+$colors: (
+  blue: (
+    light: #60a5fa,
+    base: #3b82f6,
+    dark: #1d4ed8
+  ),
+  red: (
+    light: #f87171,
+    base: #ef4444,
+    dark: #b91c1c
+  ),
+  yellow: (
+    light: #fde047,
+    base: #facc15,
+    dark: #ca8a04
+  ),
+  green: (
+    light: #4ade80,
+    base: #22c55e,
+    dark: #15803d
+  ),
+  grey: (
+    light: #e5e7eb,
+    base: #9ca3af,
+    dark: #4b5563
+  ),
+  brown: (
+    light: #92400e,
+    base: #78350f,
+    dark: #451a03
+  ),
+  pink: (
+    light: #f472b6,
+    base: #ec4899,
+    dark: #be185d
+  ),
+  orange: (
+    light: #fb923c,
+    base: #f97316,
+    dark: #c2410c
+  ),
+  purple: (
+    light: #a855f7,
+    base: #9333ea,
+    dark: #6b21a8
+  )
+);
+
+// Monochrome colors
+$black: #000000;
+$white: #ffffff;
+
+// Generate color utilities
+@each $color-name, $shades in $colors {
+  // Background colors
+  .bg-#{$color-name} {
+    &-light {
+      background-color: map-get($shades, light);
+    }
+    
+    & {
+      background-color: map-get($shades, base);
+    }
+    
+    &-dark {
+      background-color: map-get($shades, dark);
+    }
+  }
+  
+  // Text colors
+  .text-#{$color-name} {
+    &-light {
+      color: map-get($shades, light);
+    }
+    
+    & {
+      color: map-get($shades, base);
+    }
+    
+    &-dark {
+      color: map-get($shades, dark);
+    }
+  }
+  
+  // Border colors
+  .border-#{$color-name} {
+    &-light {
+      border-color: map-get($shades, light);
+    }
+    
+    & {
+      border-color: map-get($shades, base);
+    }
+    
+    &-dark {
+      border-color: map-get($shades, dark);
+    }
+  }
+}
+
+// Monochrome utilities
+.bg {
+  &-black {
+    background-color: $black;
+  }
+  
+  &-white {
+    background-color: $white;
+  }
+}
+
+.text {
+  &-black {
+    color: $black;
+  }
+  
+  &-white {
+    color: $white;
+  }
+}
+
+.border {
+  &-black {
+    border-color: $black;
+  }
+  
+  &-white {
+    border-color: $white;
+  }
+}
+
+// Common use cases
+.bg-primary {
+  background-color: map-get(map-get($colors, blue), base);
+}
+
+.bg-danger {
+  background-color: map-get(map-get($colors, red), base);
+}
+
+.bg-warning {
+  background-color: map-get(map-get($colors, yellow), base);
+}
+
+.bg-success {
+  background-color: map-get(map-get($colors, green), base);
+}
+
+.text-primary {
+  color: map-get(map-get($colors, blue), base);
+}
+
+.text-danger {
+  color: map-get(map-get($colors, red), base);
+}
+
+.text-warning {
+  color: map-get(map-get($colors, yellow), base);
+}
+
+.text-success {
+  color: map-get(map-get($colors, green), base);
+}

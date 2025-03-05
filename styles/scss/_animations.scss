@@ -1,0 +1,52 @@
+// Fade animations
+.fade {
+  &-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    
+    &.active {
+      opacity: 1;
+    }
+  }
+  
+  &-out {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    
+    &.active {
+      opacity: 0;
+    }
+  }
+}
+
+// Transition utilities
+.transition {
+  &-all {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  &-transform {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  &-opacity {
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+// Subtle animations
+.hover-scale {
+  transition: transform 0.2s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hover-lift {
+  transition: transform 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

@@ -1,0 +1,120 @@
+// Position properties
+.static { position: static; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+// Z-index scale
+@for $i from -10 through 50 {
+  @if $i % 10 == 0 {
+    .z-#{$i} {
+      z-index: $i;
+    }
+  }
+}
+
+// Position values
+$position-values: (
+  '0': 0,
+  '25': 25%,
+  '50': 50%,
+  '75': 75%,
+  '100': 100%,
+  'auto': auto,
+  // Fixed values
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '4': 1rem,
+  '8': 2rem,
+  '16': 4rem
+);
+
+// Generate position utilities
+@each $key, $value in $position-values {
+  .top-#{$key} {
+    top: $value;
+  }
+  
+  .right-#{$key} {
+    right: $value;
+  }
+  
+  .bottom-#{$key} {
+    bottom: $value;
+  }
+  
+  .left-#{$key} {
+    left: $value;
+  }
+}
+
+// Inset shortcuts
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.inset-auto {
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+
+// Center positioning utilities
+.center-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-y {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.center-both {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Screen edge snapping
+.snap-top {
+  top: 0;
+}
+
+.snap-right {
+  right: 0;
+}
+
+.snap-bottom {
+  bottom: 0;
+}
+
+.snap-left {
+  left: 0;
+}
+
+// Floating utilities
+.float-left { float: left; }
+.float-right { float: right; }
+.float-none { float: none; }
+
+// Clear utilities
+.clear-left { clear: left; }
+.clear-right { clear: right; }
+.clear-both { clear: both; }
+.clear-none { clear: none; }
+
+// Overflow utilities
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-scroll { overflow: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-y-hidden { overflow-y: hidden; }

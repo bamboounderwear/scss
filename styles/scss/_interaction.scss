@@ -1,0 +1,64 @@
+// Cursor utilities
+.cursor {
+  &-auto { cursor: auto; }
+  &-default { cursor: default; }
+  &-pointer { cursor: pointer; }
+  &-wait { cursor: wait; }
+  &-text { cursor: text; }
+  &-move { cursor: move; }
+  &-help { cursor: help; }
+  &-not-allowed { cursor: not-allowed; }
+  &-grab { cursor: grab; }
+  &-grabbing { cursor: grabbing; }
+  &-zoom-in { cursor: zoom-in; }
+  &-zoom-out { cursor: zoom-out; }
+}
+
+// User select
+.select {
+  &-none { user-select: none; }
+  &-text { user-select: text; }
+  &-all { user-select: all; }
+  &-auto { user-select: auto; }
+}
+
+// Pointer events
+.pointer-events {
+  &-none { pointer-events: none; }
+  &-auto { pointer-events: auto; }
+}
+
+// Touch action
+.touch {
+  &-auto { touch-action: auto; }
+  &-none { touch-action: none; }
+  &-pan-x { touch-action: pan-x; }
+  &-pan-y { touch-action: pan-y; }
+  &-manipulation { touch-action: manipulation; }
+}
+
+// Scroll behavior
+.scroll {
+  &-auto { scroll-behavior: auto; }
+  &-smooth { scroll-behavior: smooth; }
+}
+
+// Scroll snap
+.snap {
+  &-none { scroll-snap-type: none; }
+  &-x { scroll-snap-type: x mandatory; }
+  &-y { scroll-snap-type: y mandatory; }
+  &-both { scroll-snap-type: both mandatory; }
+  
+  &-start { scroll-snap-align: start; }
+  &-center { scroll-snap-align: center; }
+  &-end { scroll-snap-align: end; }
+}
+
+// Resize
+.resize {
+  &-none { resize: none; }
+  &-y { resize: vertical; }
+  &-x { resize: horizontal; }
+  &-both { resize: both; }
+}
