@@ -1,26 +1,12 @@
 {
-  "name": "v2-sass-customized-design-system",
+  "name": "sass-project",
   "version": "1.0.0",
-  "license": "MIT",
-  "private": true,
-  "type": "module",
+  "description": "A simple Sass project skeleton",
   "scripts": {
-    "dev": "vite",
-    "build": "npm run sass && vite build",
-    "preview": "vite preview",
-    "sass": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules/@picocss/pico/scss/ scss/:public/css/",
-    "sass:watch": "sass --watch --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules/@picocss/pico/scss/ scss/:public/css/"
+    "build": "sass scss/main.scss css/style.css --watch"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@picocss/pico": "2.0.6",
-    "autoprefixer": "^10.4.18",
-    "postcss": "^8.4.35",
-    "sass": "^1.71.1",
-    "vite": "^5.1.4"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ]
+    "sass": "^1.63.6"
+  }
 }
