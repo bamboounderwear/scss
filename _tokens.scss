@@ -1,40 +1,41 @@
 // Colors
 $background-color: #f9f9f9;
 $text-color: #333;
-$primary-color: #007bff;
-$secondary-color: #6c757d;
+$primary-color: #3498db;
+$secondary-color: #e74c3c;
+$success-color: #2ecc71;
+$warning-color: #f1c40f;
+$error-color: #e74c3c;
 
 // Typography
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-size-base: 16px;
-$font-size-small: 14px;
-$font-size-large: 20px;
 $line-height-base: 1.5;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
 
 // Spacing
 $spacing-small: 8px;
 $spacing-medium: 16px;
 $spacing-large: 24px;
+$spacing-xlarge: 32px;
 
 // Breakpoints
-$breakpoints: (
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px
-);
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Grid
+$grid-columns: 12;
+$grid-gutter: 16px;
 
 // Borders
-$border-radius-small: 4px;
-$border-radius-medium: 8px;
-$border-radius-large: 16px;
+$border-width: 1px;
+$border-style: solid;
+$border-color: #ddd;
 
 // Shadows
-$shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12);
-$shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.16);
-$shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-// Z-Indices
-$z-index-low: 10;
-$z-index-medium: 100;
-$z-index-high: 1000;
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);

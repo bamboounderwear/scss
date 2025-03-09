@@ -1,888 +1,349 @@
-// Responsive Mixins
-@mixin respond-to($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-        @media (min-width: map-get($breakpoints, $breakpoint)) {
-            @content;
+// Margin utility
+@mixin margin($property, $size) {
+    margin-#{$property}: $size;
+}
+
+// Padding utility
+@mixin padding($property, $size) {
+    padding-#{$property}: $size;
+}
+
+// Font size utility
+@mixin font-size($size) {
+    font-size: $size;
+}
+
+// Line height utility
+@mixin line-height($size) {
+    line-height: $size;
+}
+
+// Color utility
+@mixin color($color) {
+    color: $color;
+}
+
+// Background color utility
+@mixin background-color($color) {
+    background-color: $color;
+}
+
+// Border utility
+@mixin border($width, $style, $color) {
+    border: $width $style $color;
+}
+
+// Border radius utility
+@mixin border-radius($radius) {
+    border-radius: $radius;
+}
+
+// Box shadow utility
+@mixin box-shadow($shadow) {
+    box-shadow: $shadow;
+}
+
+// Display utility
+@mixin display($display) {
+    display: $display;
+}
+
+// Flex utility
+@mixin flex($flex) {
+    flex: $flex;
+}
+
+// Justify content utility
+@mixin justify-content($justify) {
+    justify-content: $justify;
+}
+
+// Align items utility
+@mixin align-items($align) {
+    align-items: $align;
+}
+
+// Grid utility
+@mixin grid-template-columns($columns) {
+    grid-template-columns: $columns;
+}
+
+@mixin grid-template-rows($rows) {
+    grid-template-rows: $rows;
+}
+
+@mixin grid-column($column) {
+    grid-column: $column;
+}
+
+@mixin grid-row($row) {
+    grid-row: $row;
+}
+
+// Responsive utility
+@mixin responsive($breakpoint, $property, $value) {
+    @if $breakpoint == sm {
+        @media (min-width: $breakpoint-sm) {
+            #{$property}: $value;
         }
-    } @else {
-        @warn "Unknown breakpoint #{$breakpoint}. Choose from: #{map-keys($breakpoints)}";
-    }
-}
-
-// Margin Utilities
-@mixin margin($direction, $size, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            margin-#{$direction}: $size;
+    } @else if $breakpoint == md {
+        @media (min-width: $breakpoint-md) {
+            #{$property}: $value;
         }
-    } @else {
-        margin-#{$direction}: $size;
-    }
-}
-
-@mixin margin-x($size, $breakpoint: null) {
-    @include margin(left, $size, $breakpoint);
-    @include margin(right, $size, $breakpoint);
-}
-
-@mixin margin-y($size, $breakpoint: null) {
-    @include margin(top, $size, $breakpoint);
-    @include margin(bottom, $size, $breakpoint);
-}
-
-@mixin margin-top($size, $breakpoint: null) {
-    @include margin(top, $size, $breakpoint);
-}
-
-@mixin margin-bottom($size, $breakpoint: null) {
-    @include margin(bottom, $size, $breakpoint);
-}
-
-@mixin margin-left($size, $breakpoint: null) {
-    @include margin(left, $size, $breakpoint);
-}
-
-@mixin margin-right($size, $breakpoint: null) {
-    @include margin(right, $size, $breakpoint);
-}
-
-// Padding Utilities
-@mixin padding($direction, $size, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            padding-#{$direction}: $size;
+    } @else if $breakpoint == lg {
+        @media (min-width: $breakpoint-lg) {
+            #{$property}: $value;
         }
-    } @else {
-        padding-#{$direction}: $size;
-    }
-}
-
-@mixin padding-x($size, $breakpoint: null) {
-    @include padding(left, $size, $breakpoint);
-    @include padding(right, $size, $breakpoint);
-}
-
-@mixin padding-y($size, $breakpoint: null) {
-    @include padding(top, $size, $breakpoint);
-    @include padding(bottom, $size, $breakpoint);
-}
-
-@mixin padding-top($size, $breakpoint: null) {
-    @include padding(top, $size, $breakpoint);
-}
-
-@mixin padding-bottom($size, $breakpoint: null) {
-    @include padding(bottom, $size, $breakpoint);
-}
-
-@mixin padding-left($size, $breakpoint: null) {
-    @include padding(left, $size, $breakpoint);
-}
-
-@mixin padding-right($size, $breakpoint: null) {
-    @include padding(right, $size, $breakpoint);
-}
-
-// Font Size Utilities
-@mixin font-size($size, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            font-size: $size;
-        }
-    } @else {
-        font-size: $size;
-    }
-}
-
-// Line Height Utilities
-@mixin line-height($size, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            line-height: $size;
-        }
-    } @else {
-        line-height: $size;
-    }
-}
-
-// Width Utilities
-@mixin width($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            width: $value;
-        }
-    } @else {
-        width: $value;
-    }
-}
-
-// Height Utilities
-@mixin height($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            height: $value;
-        }
-    } @else {
-        height: $value;
-    }
-}
-
-// Flexbox Utilities
-@mixin flex-direction($direction, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            flex-direction: $direction;
-        }
-    } @else {
-        flex-direction: $direction;
-    }
-}
-
-@mixin justify-content($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            justify-content: $value;
-        }
-    } @else {
-        justify-content: $value;
-    }
-}
-
-@mixin align-items($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            align-items: $value;
-        }
-    } @else {
-        align-items: $value;
-    }
-}
-
-// Display Utilities
-@mixin display($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            display: $value;
-        }
-    } @else {
-        display: $value;
-    }
-}
-
-// Text Utilities
-@mixin text-align($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            text-align: $value;
-        }
-    } @else {
-        text-align: $value;
-    }
-}
-
-@mixin text-color($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            color: $value;
-        }
-    } @else {
-        color: $value;
-    }
-}
-
-// Border Utilities
-@mixin border-radius($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            border-radius: $value;
-        }
-    } @else {
-        border-radius: $value;
-    }
-}
-
-// Shadow Utilities
-@mixin box-shadow($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            box-shadow: $value;
-        }
-    } @else {
-        box-shadow: $value;
-    }
-}
-
-// Z-Index Utilities
-@mixin z-index($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            z-index: $value;
-        }
-    } @else {
-        z-index: $value;
-    }
-}
-
-// Background Utilities
-@mixin background-color($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            background-color: $value;
-        }
-    } @else {
-        background-color: $value;
-    }
-}
-
-// Flex Utilities
-@mixin flex($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            flex: $value;
-        }
-    } @else {
-        flex: $value;
-    }
-}
-
-// Grid Utilities
-@mixin grid-template-columns($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            grid-template-columns: $value;
-        }
-    } @else {
-        grid-template-columns: $value;
-    }
-}
-
-@mixin grid-gap($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            grid-gap: $value;
-        }
-    } @else {
-        grid-gap: $value;
-    }
-}
-
-// Position Utilities
-@mixin position($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            position: $value;
-        }
-    } @else {
-        position: $value;
-    }
-}
-
-@mixin top($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            top: $value;
-        }
-    } @else {
-        top: $value;
-    }
-}
-
-@mixin right($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            right: $value;
-        }
-    } @else {
-        right: $value;
-    }
-}
-
-@mixin bottom($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            bottom: $value;
-        }
-    } @else {
-        bottom: $value;
-    }
-}
-
-@mixin left($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            left: $value;
-    } @else {
-        left: $value;
-    }
-}
-
-// Visibility Utilities
-@mixin visibility($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            visibility: $value;
-        }
-    } @else {
-        visibility: $value;
-    }
-}
-
-// Opacity Utilities
-@mixin opacity($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            opacity: $value;
-        }
-    } @else {
-        opacity: $value;
-    }
-}
-
-// Overflow Utilities
-@mixin overflow($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            overflow: $value;
-        }
-    } @else {
-        overflow: $value;
-    }
-}
-
-// Flex Utilities
-@mixin flex-direction($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            flex-direction: $value;
-        }
-    } @else {
-        flex-direction: $value;
-    }
-}
-
-@mixin justify-content($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            justify-content: $value;
-        }
-    } @else {
-        justify-content: $value;
-    }
-}
-
-@mixin align-items($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            align-items: $value;
-        }
-    } @else {
-        align-items: $value;
-    }
-}
-
-// Grid Utilities
-@mixin grid-template-columns($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            grid-template-columns: $value;
-        }
-    } @else {
-        grid-template-columns: $value;
-    }
-}
-
-@mixin grid-gap($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            grid-gap: $value;
-        }
-    } @else {
-        grid-gap: $value;
-    }
-}
-
-// Border Utilities
-@mixin border-radius($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            border-radius: $value;
-        }
-    } @else {
-        border-radius: $value;
-    }
-}
-
-@mixin border($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            border: $value;
-        }
-    } @else {
-        border: $value;
-    }
-}
-
-// Shadow Utilities
-@mixin box-shadow($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            box-shadow: $value;
-        }
-    } @else {
-        box-shadow: $value;
-    }
-}
-
-// Z-Index Utilities
-@mixin z-index($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            z-index: $value;
-        }
-    } @else {
-        z-index: $value;
-    }
-}
-
-// Background Utilities
-@mixin background-color($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            background-color: $value;
-        }
-    } @else {
-        background-color: $value;
-    }
-}
-
-// Opacity Utilities
-@mixin opacity($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            opacity: $value;
-        }
-    } @else {
-        opacity: $value;
-    }
-}
-
-// Overflow Utilities
-@mixin overflow($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            overflow: $value;
-        }
-    } @else {
-        overflow: $value;
-    }
-}
-
-// Display Utilities
-@mixin display($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            display: $value;
-        }
-    } @else {
-        display: $value;
-    }
-}
-
-// Text Utilities
-@mixin text-align($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            text-align: $value;
-        }
-    } @else {
-        text-align: $value;
-    }
-}
-
-@mixin text-color($value, $breakpoint: null) {
-    @if $breakpoint {
-        @include respond-to($breakpoint) {
-            color: $value;
-        }
-    } @else {
-        color: $value;
-    }
-}
-
-// Responsive Mixins
-@mixin respond-to($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-        @media (min-width: map-get($breakpoints, $breakpoint)) {
-            @content;
-        }
-    } @else {
-        @warn "Unknown breakpoint #{$breakpoint}. Choose from: #{map-keys($breakpoints)}";
-    }
-}
-
-// Generate Margin Utilities
-@each $direction in (top, bottom, left, right) {
-    @each $size in (small, medium, large) {
-        .m-#{$direction}-#{$size} {
-            margin-#{$direction}: $spacing-#{$size};
-        }
-        .m-#{$direction}-#{$size}-sm {
-            @include margin(#{$direction}, $spacing-#{$size}, sm);
-        }
-        .m-#{$direction}-#{$size}-md {
-            @include margin(#{$direction}, $spacing-#{$size}, md);
-        }
-        .m-#{$direction}-#{$size}-lg {
-            @include margin(#{$direction}, $spacing-#{$size}, lg);
+    } @else if $breakpoint == xl {
+        @media (min-width: $breakpoint-xl) {
+            #{$property}: $value;
         }
     }
 }
 
-@mixin generate-padding-utilities($direction) {
-    @each $size in (small, medium, large) {
-        .p-#{$direction}-#{$size} {
-            padding-#{$direction}: $spacing-#{$size};
-        }
-        .p-#{$direction}-#{$size}-sm {
-            @include padding(#{$direction}, $spacing-#{$size}, sm);
-        }
-        .p-#{$direction}-#{$size}-md {
-            @include padding(#{$direction}, $spacing-#{$size}, md);
-        }
-        .p-#{$direction}-#{$size}-lg {
-            @include padding(#{$direction}, $spacing-#{$size}, lg);
-        }
+// Generate margin utilities
+@each $size in $spacing-small, $spacing-medium, $spacing-large, $spacing-xlarge {
+    .m-#{$size} {
+        @include margin(top, $size);
+        @include margin(bottom, $size);
+        @include margin(left, $size);
+        @include margin(right, $size);
+    }
+    .mt-#{$size} {
+        @include margin(top, $size);
+    }
+    .mb-#{$size} {
+        @include margin(bottom, $size);
+    }
+    .ml-#{$size} {
+        @include margin(left, $size);
+    }
+    .mr-#{$size} {
+        @include margin(right, $size);
     }
 }
 
-// Generate Padding Utilities
-@include generate-padding-utilities(top);
-@include generate-padding-utilities(bottom);
-@include generate-padding-utilities(left);
-@include generate-padding-utilities(right);
-
-// Font Size Utilities
-@each $size in (small, base, large) {
-    .text-#{$size} {
-        font-size: $font-size-#{$size};
+// Generate padding utilities
+@each $size in $spacing-small, $spacing-medium, $spacing-large, $spacing-xlarge {
+    .p-#{$size} {
+        @include padding(top, $size);
+        @include padding(bottom, $size);
+        @include padding(left, $size);
+        @include padding(right, $size);
     }
-    .text-#{$size}-sm {
-        @include font-size($font-size-#{$size}, sm);
+    .pt-#{$size} {
+        @include padding(top, $size);
     }
-    .text-#{$size}-md {
-        @include font-size($font-size-#{$size}, md);
+    .pb-#{$size} {
+        @include padding(bottom, $size);
     }
-    .text-#{$size}-lg {
-        @include font-size($font-size-#{$size}, lg);
+    .pl-#{$size} {
+        @include padding(left, $size);
     }
-}
-
-// Line Height Utilities
-@each $size in (base) {
-    .line-#{$size} {
-        line-height: $line-height-#{$size};
-    }
-    .line-#{$size}-sm {
-        @include line-height($line-height-#{$size}, sm);
-    }
-    .line-#{$size}-md {
-        @include line-height($line-height-#{$size}, md);
-    }
-    .line-#{$size}-lg {
-        @include line-height($line-height-#{$size}, lg);
+    .pr-#{$size} {
+        @include padding(right, $size);
     }
 }
 
-// Border Radius Utilities
-@each $size in (small, medium, large) {
-    .rounded-#{$size} {
-        border-radius: $border-radius-#{$size};
-    }
-    .rounded-#{$size}-sm {
-        @include border-radius($border-radius-#{$size}, sm);
-    }
-    .rounded-#{$size}-md {
-        @include border-radius($border-radius-#{$size}, md);
-    }
-    .rounded-#{$size}-lg {
-        @include border-radius($border-radius-#{$size}, lg);
-    }
+// Generate font size utilities
+.font-size-sm {
+    @include font-size($font-size-sm);
+}
+.font-size-lg {
+    @include font-size($font-size-lg);
 }
 
-// Shadow Utilities
-@each $size in (small, medium, large) {
-    .shadow-#{$size} {
-        box-shadow: $shadow-#{$size};
-    }
-    .shadow-#{$size}-sm {
-        @include box-shadow($shadow-#{$size}, sm);
-    }
-    .shadow-#{$size}-md {
-        @include box-shadow($shadow-#{$size}, md);
-    }
-    .shadow-#{$size}-lg {
-        @include box-shadow($shadow-#{$size}, lg);
-    }
+// Generate line height utilities
+.line-height-sm {
+    @include line-height(1.2);
+}
+.line-height-lg {
+    @include line-height(1.8);
 }
 
-// Z-Index Utilities
-@each $size in (low, medium, high) {
-    .z-#{$size} {
-        z-index: $z-index-#{$size};
-    }
-    .z-#{$size}-sm {
-        @include z-index($z-index-#{$size}, sm);
-    }
-    .z-#{$size}-md {
-        @include z-index($z-index-#{$size}, md);
-    }
-    .z-#{$size}-lg {
-        @include z-index($z-index-#{$size}, lg);
-    }
+// Generate color utilities
+.text-primary {
+    @include color($primary-color);
+}
+.text-secondary {
+    @include color($secondary-color);
+}
+.text-success {
+    @include color($success-color);
+}
+.text-warning {
+    @include color($warning-color);
+}
+.text-error {
+    @include color($error-color);
 }
 
-// Background Color Utilities
-@each $color in (background-color, primary-color, secondary-color) {
-    .bg-#{$color} {
-        background-color: $#{$color};
-    }
-    .bg-#{$color}-sm {
-        @include background-color(#{$color}, sm);
-    }
-    .bg-#{$color}-md {
-        @include background-color(#{$color}, md);
-    }
-    .bg-#{$color}-lg {
-        @include background-color(#{$color}, lg);
-    }
+// Generate background color utilities
+.bg-primary {
+    @include background-color($primary-color);
+}
+.bg-secondary {
+    @include background-color($secondary-color);
+}
+.bg-success {
+    @include background-color($success-color);
+}
+.bg-warning {
+    @include background-color($warning-color);
+}
+.bg-error {
+    @include background-color($error-color);
 }
 
-// Text Color Utilities
-@each $color in (text-color, primary-color, secondary-color) {
-    .text-#{$color} {
-        color: $#{$color};
-    }
-    .text-#{$color}-sm {
-        @include text-color(#{$color}, sm);
-    }
-    .text-#{$color}-md {
-        @include text-color(#{$color}, md);
-    }
-    .text-#{$color}-lg {
-        @include text-color(#{$color}, lg);
-    }
+// Generate border utilities
+.border {
+    @include border($border-width, $border-style, $border-color);
+}
+.border-top {
+    @include border(top, $border-width, $border-style, $border-color);
+}
+.border-bottom {
+    @include border(bottom, $border-width, $border-style, $border-color);
+}
+.border-left {
+    @include border(left, $border-width, $border-style, $border-color);
+}
+.border-right {
+    @include border(right, $border-width, $border-style, $border-color);
 }
 
-// Flex Utilities
-@mixin generate-flex-utilities($property, $value) {
-    .#{$property}-#{$value} {
-        #{$property}: $value;
-    }
-    .#{$property}-#{$value}-sm {
-        @include #{$property}($value, sm);
-    }
-    .#{$property}-#{$value}-md {
-        @include #{$property}($value, md);
-    }
-    .#{$property}-#{$value}-lg {
-        @include #{$property}($value, lg);
-    }
+// Generate border radius utilities
+.border-radius-sm {
+    @include border-radius(4px);
+}
+.border-radius-lg {
+    @include border-radius(8px);
 }
 
-// Generate Flex Direction Utilities
-@include generate-flex-utilities(flex-direction, row);
-@include generate-flex-utilities(flex-direction, column);
-@include generate-flex-utilities(justify-content, flex-start);
-@include generate-flex-utilities(justify-content, flex-end);
-@include generate-flex-utilities(justify-content, center);
-@include generate-flex-utilities(justify-content, space-between);
-@include generate-flex-utilities(justify-content, space-around);
-@include generate-flex-utilities(align-items, flex-start);
-@include generate-flex-utilities(align-items, flex-end);
-// Display Utilities
-@each $value in (none, block, inline, inline-block, flex, grid) {
-    .d-#{$value} {
-        display: $value;
-    }
-    .d-#{$value}-sm {
-        @include display($value, sm);
-    }
-    .d-#{$value}-md {
-        @include display($value, md);
-    }
-    .d-#{$value}-lg {
-        @include display($value, lg);
-    }
+// Generate box shadow utilities
+.shadow-sm {
+    @include box-shadow($shadow-sm);
+}
+.shadow-md {
+    @include box-shadow($shadow-md);
+}
+.shadow-lg {
+    @include box-shadow($shadow-lg);
 }
 
-// Visibility Utilities
-@each $value in (visible, hidden) {
-    .#{$value} {
-        visibility: $value;
-    }
-    .#{$value}-sm {
-        @include visibility($value, sm);
-    }
-    .#{$value}-md {
-        @include visibility($value, md);
-    }
-    .#{$value}-lg {
-        @include visibility($value, lg);
-    }
+// Generate display utilities
+.d-block {
+    @include display(block);
+}
+.d-inline {
+    @include display(inline);
+}
+.d-inline-block {
+    @include display(inline-block);
+}
+.d-flex {
+    @include display(flex);
 }
 
-// Opacity Utilities
-@each $value in (0, 25, 50, 75, 100) {
-    .opacity-#{$value} {
-        opacity: $value / 100;
-    }
-    .opacity-#{$value}-sm {
-        @include opacity($value / 100, sm);
-    }
-    .opacity-#{$value}-md {
-        @include opacity($value / 100, md);
-    }
-    .opacity-#{$value}-lg {
-        @include opacity($value / 100, lg);
-    }
+// Generate flex utilities
+.flex-1 {
+    @include flex(1);
+}
+.flex-2 {
+    @include flex(2);
+}
+.flex-3 {
+    @include flex(3);
 }
 
-// Overflow Utilities
-@each $value in (visible, hidden, auto, scroll) {
-    .overflow-#{$value} {
-        overflow: $value;
-    }
-    .overflow-#{$value}-sm {
-        @include overflow($value, sm);
-    }
-    .overflow-#{$value}-md {
-        @include overflow($value, md);
-    }
-    .overflow-#{$value}-lg {
-        @include overflow($value, lg);
-    }
+// Generate justify content utilities
+.justify-content-start {
+    @include justify-content(flex-start);
+}
+.justify-content-end {
+    @include justify-content(flex-end);
+}
+.justify-content-center {
+    @include justify-content(center);
+}
+.justify-content-between {
+    @include justify-content(space-between);
+}
+.justify-content-around {
+    @include justify-content(space-around);
 }
 
-// Border Utilities
-@each $size in (small, medium, large) {
-    .border-#{$size} {
-        border-radius: $border-radius-#{$size};
-    }
-    .border-#{$size}-sm {
-        @include border-radius($border-radius-#{$size}, sm);
-    }
-    .border-#{$size}-md {
-        @include border-radius($border-radius-#{$size}, md);
-    }
-    .border-#{$size}-lg {
-        @include border-radius($border-radius-#{$size}, lg);
-    }
+// Generate align items utilities
+.align-items-start {
+    @include align-items(flex-start);
+}
+.align-items-end {
+    @include align-items(flex-end);
+}
+.align-items-center {
+    @include align-items(center);
+}
+.align-items-baseline {
+    @include align-items(baseline);
 }
 
-// Shadow Utilities
-@each $size in (small, medium, large) {
-    .shadow-#{$size} {
-        box-shadow: $shadow-#{$size};
-    }
-    .shadow-#{$size}-sm {
-        @include box-shadow($shadow-#{$size}, sm);
-    }
-    .shadow-#{$size}-md {
-        @include box-shadow($shadow-#{$size}, md);
-    }
-    .shadow-#{$size}-lg {
-        @include box-shadow($shadow-#{$size}, lg);
-    }
+// Generate grid utilities
+.grid {
+    display: grid;
+}
+.grid-template-columns-2 {
+    @include grid-template-columns(repeat(2, 1fr));
+}
+.grid-template-columns-3 {
+    @include grid-template-columns(repeat(3, 1fr));
+}
+.grid-template-columns-4 {
+    @include grid-template-columns(repeat(4, 1fr));
+}
+.grid-template-rows-2 {
+    @include grid-template-rows(repeat(2, 1fr));
+}
+.grid-template-rows-3 {
+    @include grid-template-rows(repeat(3, 1fr));
+}
+.grid-template-rows-4 {
+    @include grid-template-rows(repeat(4, 1fr));
+}
+.grid-column-1 {
+    @include grid-column(1);
+}
+.grid-column-2 {
+    @include grid-column(2);
+}
+.grid-column-3 {
+    @include grid-column(3);
+}
+.grid-column-4 {
+    @include grid-column(4);
+}
+.grid-row-1 {
+    @include grid-row(1);
+}
+.grid-row-2 {
+    @include grid-row(2);
+}
+.grid-row-3 {
+    @include grid-row(3);
+}
+.grid-row-4 {
+    @include grid-row(4);
 }
 
-// Flex Utilities
-@mixin generate-flex-utilities($property, $value) {
-    .#{$property}-#{$value} {
-        #{$property}: $value;
-    }
-    .#{$property}-#{$value}-sm {
-        @include #{$property}($value, sm);
-    }
-    .#{$property}-#{$value}-md {
-        @include #{$property}($value, md);
-    }
-    .#{$property}-#{$value}-lg {
-        @include #{$property}($value, lg);
-    }
+// Generate responsive utilities
+.sm\:m-0 {
+    @include responsive(sm, margin, 0);
 }
-
-// Generate Flex Direction Utilities
-@include generate-flex-utilities(flex-direction, row);
-@include generate-flex-utilities(flex-direction, column);
-@include generate-flex-utilities(justify-content, flex-start);
-@include generate-flex-utilities(justify-content, flex-end);
-@include generate-flex-utilities(justify-content, center);
-@include generate-flex-utilities(justify-content, space-between);
-@include generate-flex-utilities(justify-content, space-around);
-@include generate-flex-utilities(align-items, flex-start);
-@include generate-flex-utilities(align-items, flex-end);
-@include generate-flex-utilities(align-items, center);
-
-// Display Utilities
-@each $value in (none, block, inline, inline-block, flex, grid) {
-    .d-#{$value} {
-        display: $value;
-    }
-    .d-#{$value}-sm {
-        @include display($value, sm);
-    }
-    .d-#{$value}-md {
-        @include display($value, md);
-    }
-    .d-#{$value}-lg {
-        @include display($value, lg);
-    }
+.md\:m-0 {
+    @include responsive(md, margin, 0);
 }
-
-// Visibility Utilities
-@each $value in (visible, hidden) {
-    .#{$value} {
-        visibility: $value;
-    }
-    .#{$value}-sm {
-        @include visibility($value, sm);
-    }
-    .#{$value}-md {
-        @include visibility($value, md);
-    }
-    .#{$value}-lg {
-        @include visibility($value, lg);
-    }
+.lg\:m-0 {
+    @include responsive(lg, margin, 0);
 }
-
-// Opacity Utilities
-@each $value in (0, 25, 50, 75, 100) {
-    .opacity-#{$value} {
-        opacity: $value / 100;
-    }
-    .opacity-#{$value}-sm {
-        @include opacity($value / 100, sm);
-    }
-    .opacity-#{$value}-md {
-        @include opacity($value / 100, md);
-    }
-    .opacity-#{$value}-lg {
-        @include opacity($value / 100, lg);
-    }
-}
-
-// Overflow Utilities
-@each $value in (visible, hidden, auto, scroll) {
-    .overflow-#{$value} {
-        overflow: $value;
-    }
-    .overflow-#{$value}-sm {
-        @include overflow($value, sm);
-    }
-    .overflow-#{$value}-md {
-        @include overflow($value, md);
-    }
-    .overflow-#{$value}-lg {
-        @include overflow($value, lg);
-    }
+.xl\:m-0 {
+    @include responsive(xl, margin, 0);
 }
