@@ -3,17 +3,29 @@
 
 // Example usage of tokens and utilities
 body {
-    background-color: $background-color;
-    color: $text-color;
-    font-family: $font-stack;
+    @include background-color(background-color);
+    @include text-color(text-color);
+    @include font-size(base);
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    @include margin-bottom($spacing-large);
+    @include margin-bottom(md, $spacing-large);
+    @include font-size(large, md);
+    @include text-align(center, sm);
 }
 
 p {
-    @include margin-bottom($spacing-medium);
+    @include margin-bottom(sm, $spacing-medium);
+    @include font-size(base, sm);
+
+    @include text-align(left, md);
+}
+
+.container {
+    @include width(100%);
+    @include max-width(1200px);
+    @include margin-x(auto);
+    @include padding-x($spacing-medium);
 }

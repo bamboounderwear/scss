@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="output.css">
 </head>
 <body>
-    <h1>Hello, SCSS Framework!</h1>
-    <p>This is a simple example of a branded web design using your custom SCSS framework.</p>
+    <div class="container">
+        <h1 class="text-center text-large sm:text-base md:text-large lg:text-large">Hello, SCSS Framework!</h1>
+        <p class="text-left sm:text-center md:text-left lg:text-left">This is a simple example of a branded web design using your custom SCSS framework.</p>
+        <div class="flex flex-row sm:flex-column md:flex-row lg:flex-column">
+            <div class="p-16 sm:p-8 md:p-16 lg:p-8">
+                <p class="text-base sm:text-small md:text-base lg:text-small">Responsive Flex Item 1</p>
+            </div>
+            <div class="p-16 sm:p-8 md:p-16 lg:p-8">
+                <p class="text-base sm:text-small md:text-base lg:text-small">Responsive Flex Item 2</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
