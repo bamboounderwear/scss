@@ -1,13 +1,15 @@
 {
-  "name": "sass-project",
-  "version": "1.0.0",
-  "description": "A simple Sass project skeleton",
-  "scripts": {
-    "build": "sass scss/main.scss css/style.css",
-    "start": "sass scss/main.scss css/style.css --watch"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "sass": "^1.63.6"
+    "name": "scss-framework",
+    "version": "1.0.0",
+    "description": "A low-level SCSS framework combining utilities with design tokens",
+    "main": "index.html",
+    "scripts": {
+      "build": "node-sass main.scss main.css --output-style compressed",
+      "watch": "node-sass main.scss main.css --output-style compressed --watch"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "devDependencies": {
+      "node-sass": "^7.0.1"
+    }
   }
-}
