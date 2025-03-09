@@ -3,22 +3,24 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "index.html",
+  "type": "module",
   "scripts": {
-    "build": "mkdir -p css && sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules/@picocss/pico/scss/ scss/:css/",
-    "dev": "npm run build && serve",
-    "start": "npm run dev"
+    "dev": "vite",
+    "build": "npm run sass && vite build",
+    "preview": "vite preview",
+    "sass": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules/@picocss/pico/scss/ scss/:public/css/",
+    "sass:watch": "sass --watch --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules/@picocss/pico/scss/ scss/:public/css/"
   },
   "devDependencies": {
     "@picocss/pico": "2.0.6",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
-    "postcss-cli": "^11.0.0",
-    "postcss-scss": "^4.0.9",
     "sass": "^1.71.1",
-    "serve": "^14.2.1"
+    "vite": "^5.1.4"
   },
   "browserslist": [
-    "defaults"
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
   ]
 }
