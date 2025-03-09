@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A simple Sass project skeleton",
   "scripts": {
-    "build": "sass scss/main.scss css/style.css --watch"
+    "build": "sass scss/main.scss css/style.css",
+    "start": "sass scss/main.scss css/style.css --watch"
   },
   "dependencies": {},
   "devDependencies": {
