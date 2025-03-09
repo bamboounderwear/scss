@@ -1,104 +1,127 @@
-import loader from '@monaco-editor/loader';
+// Initialize
+let bitcoinPrice = 0;
+let recommendedFees = {
+  minimumFee: 20,
+  economyFee: 40,
+  hourFee: 60,
+  halfHourFee: 70,
+  fastestFee: 80,
+};
+const transactionSizeInBytes = 400;
 
-// Configure Monaco loader
-loader.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });
+// Form targets
+const form = document.querySelector("form");
+const addressInput = form.querySelector("#address");
+const amountInput = form.querySelector("#amount");
+const priorityInput = form.querySelector("#priority");
+const priorityOptions = form.querySelectorAll("#priorities option");
 
-// Example starter code
-const starterHTML = `<div class="container p-4">
-  <h1 class="text-center mb-4">CSS Framework Demo</h1>
-  <div class="bg-blue p-4 rounded-md shadow-md">
-    <p class="text-white">This is a demo of our CSS framework!</p>
-  </div>
-  <div class="grid gap-4 mt-4" style="grid-template-columns: repeat(3, 1fr);">
-    <div class="bg-red-light p-4 rounded-md text-white">
-      <h3 class="mb-2">Card 1</h3>
-      <p>Testing colors and spacing</p>
-    </div>
-    <div class="bg-green-light p-4 rounded-md text-white">
-      <h3 class="mb-2">Card 2</h3>
-      <p>With grid layout</p>
-    </div>
-    <div class="bg-purple-light p-4 rounded-md text-white">
-      <h3 class="mb-2">Card 3</h3>
-      <p>And rounded corners</p>
-    </div>
-  </div>
-</div>`;
+// Amounts targets
+const table = form.querySelector("table");
+const amountUsd = form.querySelector("#amount-usd");
+const transactionFeesBtc = table.querySelector("#transaction-fees-btc");
+const transactionFeesUsd = table.querySelector("#transaction-fees-usd");
+const totalReceivedBtc = table.querySelector("#total-received-btc");
+const totalReceivedUsd = table.querySelector("#total-received-usd");
 
-const starterCSS = `/* Add your custom CSS here */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+// Fetch Data
+const fetchData = async (url) => {
+  const response = await fetch(url);
+  return await response.json();
+};
 
-h1 {
-  color: #333;
-}`;
+// Calculate Transaction
+const calculateTransaction = () => {
+  const amount = amountInput.value;
+  const priority = priorityInput.value;
+  const feesInSats = calculateFeesInSats(priority);
+  const feeInBtc = feesInSats / 100_000_000;
+  updateUI(amount, feeInBtc);
+};
 
-// Create preview shadow root
-const previewContainer = document.getElementById('preview');
-const shadow = previewContainer.attachShadow({ mode: 'open' });
+// Calculate Fees in Sats
+const calculateFeesInSats = (priority) => {
+  const fees = ["minimumFee", "economyFee", "hourFee", "halfHourFee", "fastestFee"];
+  return transactionSizeInBytes * recommendedFees[fees[priority - 1]];
+};
 
-// Load Monaco Editor
-loader.init().then(monaco => {
-  const editor = {
-    html: monaco.editor.create(document.getElementById('html-editor'), {
-      value: starterHTML,
-      language: 'html',
-      theme: 'vs-dark',
-      minimap: { enabled: false },
-      fontSize: 14,
-      lineNumbers: 'on',
-      roundedSelection: true,
-      scrollBeyondLastLine: false,
-      automaticLayout: true,
-      padding: { top: 10 }
-    }),
-    
-    css: monaco.editor.create(document.getElementById('css-editor'), {
-      value: starterCSS,
-      language: 'css',
-      theme: 'vs-dark',
-      minimap: { enabled: false },
-      fontSize: 14,
-      lineNumbers: 'on',
-      roundedSelection: true,
-      scrollBeyondLastLine: false,
-      automaticLayout: true,
-      padding: { top: 10 }
-    })
-  };
+// Format Amount
+const formatAmount = (num, maximumFractionDigits = 2) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    compactDisplay: "short",
+    maximumFractionDigits,
+  });
+  return formatter.format(num);
+};
 
-  function updatePreview() {
-    const htmlContent = editor.html.getValue();
-    const cssContent = editor.css.getValue();
-    
-    // Clear previous content
-    while (shadow.firstChild) {
-      shadow.removeChild(shadow.firstChild);
-    }
-    
-    // Add framework CSS link
-    const frameworkLink = document.createElement('link');
-    frameworkLink.rel = 'stylesheet';
-    frameworkLink.href = '/styles/main.css';
-    shadow.appendChild(frameworkLink);
-    
-    // Add custom CSS
-    const style = document.createElement('style');
-    style.textContent = cssContent;
-    shadow.appendChild(style);
-    
-    // Add HTML content
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = htmlContent;
-    shadow.appendChild(wrapper);
+// Update UI
+const updateUI = (amount, feeInBtc) => {
+  transactionFeesBtc.textContent = `-${formatAmount(feeInBtc, 8)} BTC`;
+  totalReceivedBtc.textContent = `${formatAmount(amount - feeInBtc, 8)} BTC`;
+  if (bitcoinPrice !== 0) {
+    const feeInUsd = feeInBtc * bitcoinPrice;
+    amountUsd.textContent = `${formatAmount(amount * bitcoinPrice)} USD`;
+    transactionFeesUsd.textContent = `-${formatAmount(feeInUsd)} USD`;
+    totalReceivedUsd.textContent = `${formatAmount(amount * bitcoinPrice - feeInUsd)} USD`;
   }
+};
 
-  // Update preview on change
-  editor.html.onDidChangeModelContent(() => updatePreview());
-  editor.css.onDidChangeModelContent(() => updatePreview());
+// Set the priority style
+const setPriorityStyle = () => {
+  const { value, min, max } = priorityInput;
+  const percent = ((value - min) / (max - min)) * 100;
+  priorityInput.style.setProperty("--pico-selected-ratio", `${percent}%`);
+};
 
-  // Initial preview
-  updatePreview();
+// Handle Priority
+const handlePriority = () => {
+  setPriorityStyle();
+  calculateTransaction();
+};
+
+// Handle Amount
+const handleAmount = () => {
+  calculateTransaction();
+};
+
+// Handle Priority Option
+const handlePriorityOption = (event) => {
+  priorityInput.value = event.target.value;
+  setPriorityStyle();
+  calculateTransaction();
+};
+
+// Listens for input changes
+amountInput.addEventListener("input", handleAmount);
+priorityInput.addEventListener("input", handlePriority);
+
+// Fetch data and calculate transaction on load
+(async () => {
+  const prices = await fetchData("https://mempool.space/api/v1/prices");
+  bitcoinPrice = prices.USD;
+  recommendedFees = await fetchData("https://mempool.space/api/v1/fees/recommended");
+  calculateTransaction();
+})();
+
+// Listen clicks on priority options
+priorityOptions.forEach((option) => {
+  console.log(option);
+  option.addEventListener("click", handlePriorityOption);
 });
+
+// Set the priority style on load
+setPriorityStyle();
+
+// Prevent form submission
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+
+// Focus and move cursor to the end of the input on load
+(function focusAndMoveCursorToEnd(input) {
+  input.focus();
+  const value = input.value;
+  input.value = "";
+  input.value = value;
+})(amountInput);
