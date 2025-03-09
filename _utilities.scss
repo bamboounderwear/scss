@@ -1,31 +1,19 @@
-// Margin utilities
+// Margin utility
 @mixin margin-bottom($size) {
     margin-bottom: $size;
-  }
-  
-  // Padding utilities
-  @mixin padding($size) {
+}
+
+// Padding utility
+@mixin padding($size) {
     padding: $size;
-  }
-  
-  // Text utilities
-  .text-primary {
-    color: $color-primary;
-  }
-  
-  // Spacing utilities
-  .p-8 {
-    @include padding($spacing-8);
-  }
-  
-  .p-16 {
-    @include padding($spacing-16);
-  }
-  
-  .p-24 {
-    @include padding($spacing-24);
-  }
-  
-  .p-32 {
-    @include padding($spacing-32);
-  }
+}
+
+// Font size utility
+@mixin font-size($size) {
+    font-size: $size;
+}
+
+// Line height utility
+@mixin line-height($size) {
+    line-height: $size;
+}

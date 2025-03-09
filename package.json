@@ -4,8 +4,8 @@
     "description": "A low-level SCSS framework combining utilities with design tokens",
     "main": "index.html",
     "scripts": {
-      "build": "node-sass main.scss main.css --output-style compressed",
-      "watch": "node-sass main.scss main.css --output-style compressed --watch"
+      "build": "node-sass main.scss output.css --source-map true",
+      "watch": "node-sass main.scss output.css --source-map true --watch"
     },
     "author": "Your Name",
     "license": "MIT",

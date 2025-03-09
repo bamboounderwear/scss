@@ -1,16 +1,19 @@
-// Import design tokens
-@import 'tokens';
-
-// Import utility classes
-@import 'utilities';
+@import "tokens";
+@import "utilities";
 
 // Example usage of tokens and utilities
 body {
-  background-color: $color-background;
-  color: $color-text;
-  font-family: $font-primary;
+    background-color: $background-color;
+    color: $text-color;
+    font-family: $font-stack;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-  @include margin-bottom(16px);
+    @include margin-bottom($spacing-large);
+}
+
+p {
+    @include margin-bottom($spacing-medium);
 }
